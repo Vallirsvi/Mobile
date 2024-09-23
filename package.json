@@ -16,7 +16,7 @@
     "@types/react": "~18.2.79",
     "expo": "~51.0.26",
     "expo-status-bar": "~1.12.1",
-    "firebase": "^10.13.1",
+    "firebase": "^10.13.2",
     "my-test": "file:",
     "react": "18.2.0",
     "react-native": "0.74.5",

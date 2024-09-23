@@ -1,15 +1,17 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 
 
 
 const AuthContext = createContext({});
 
 export const AuthProvider = ({children}) => {
+    const [signed, setSigned] = useState(false);
+    const [userEmail, setUserEmail] = useState("");
     return (
         <AuthContext.Provider value={{
-            signed: false,
+            signed: signed,
             token: "asdsadawdw awadsdwa",
-            email: "aula@fatectp.edu.br"
+            email: userEmail, setSigned, setUserEmail
         }}>
             {children}
         </AuthContext.Provider>

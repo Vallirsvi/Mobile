@@ -1,8 +1,15 @@
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../services/database/firebase'
+import { useContext } from "react";
  
-export async function LoginUsuario() {
-    const usuario =  await signInWithEmailAndPassword(auth, "teste@gmail.com", "123456789");
+export async function LoginUsuario(email, password) {
+  const { setSigned, setUserEmail} = useContext(AuthContext)
+    const usuario =  await signInWithEmailAndPassword(auth, email, password);
+
+    if(usuario){
+      setSigned( true)
+      setUserEmail( usuario.email)
+    }
     console.log(usuario)
     return usuario;
 }
@@ -11,7 +18,7 @@ export async function LogoutUsuaro() {
     auth.signOut()
 }
  
-export async function RegistarUsuario(){
+export async function RegistarUsuario(email, password){
  
    await createUserWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {

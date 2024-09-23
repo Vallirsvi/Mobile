@@ -1,14 +1,21 @@
 import { StatusBar } from "expo-status-bar";
 import {StyleSheet, Text, View, Image, TouchableOpacity, TextInput,} from "react-native";
 import { LoginUsuario } from "../services/auth-firebase";
+import { useState } from "react";
 
 const icon = require("../../assets/favicon.png");
 
 const Login = ({navigation}) => {
 
+
+const [ email, setEmail] = useState("");
+const [ password, setPassword] = useState("");
+
+
  const onClickEntrar = async () => {
-  const userLogin = await LoginUsuario();
-  navigation.navigate('Home', {name:'Home'})
+  console.log(email, password);
+  const userLogin = await LoginUsuario(email, password);
+  // navigation.navigate('Home', {name:'Home'})
  }
   
 const onClickRegistrar = ()=>{
@@ -18,18 +25,22 @@ const onClickRegistrar = ()=>{
     <View style={styles.container}>
       <Image style={styles.image} source={icon} />
       <View style={styles.body}>
-        <Text style={styles.title}>Login 1609</Text>
+        <Text style={styles.title}>Login 2309</Text>
         <View style={styles.areaInput}>
           <TextInput
+            name="email"
             style={styles.textField}
-            placeholder="Email"
+            placeholder="E-mail"
             keyboardType="email-address"
+            onChangeText={text => setEmail(text)}
           />
           <TextInput
+            name="passwrod"
             style={styles.textField}
-            placeholder="Password"
+            placeholder="Senha"
             keyboardType="default"
             secureTextEntry
+            onChangeText={text => setPassword(text)}
           />
           <TouchableOpacity style={styles.button}
              onPress={onClickEntrar}
