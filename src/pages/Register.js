@@ -1,97 +1,116 @@
-import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import React from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  TextInput,
+} from "react-native";
 
 
-import logo from '../../assets/favicon.png'; 
+const icon = require("../../assets/favicon.png");
 
-export default function Register({navigation}) {
-  return (
+const Register= ({navigation}) => (
     <View style={styles.container}>
-      <Image 
-        source={logo}  
-        style={styles.logo}
-      />
-      <Text style={styles.loginText}>Login</Text>
-      
-      <TextInput
-        style={styles.input}
-        placeholder="Nome de usuário"
-        autoCapitalize="none"
-        keyboardType="default"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Senha"
-        secureTextEntry={true}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Repita sua Senha"
-        secureTextEntry={true}
-      />
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText} onPress={() =>
-        navigation.navigate('Home', {name: 'Home'})
-      }>Acessar</Text>
-      </TouchableOpacity>
-      
-      <Text style={styles.signupText}>
-        Não possui conta? <Text style={styles.signupLink} onPress={() =>
-          navigation.navigate('Register', {name: 'Register'})
-        }
-         >faça inscrição!</Text>
-      </Text>
+      <Image style={styles.image} source={icon} />
+      <View style={styles.body}>
+        <Text style={styles.title}>Registro</Text>
+        <View style={styles.areaInput}>
+          <TextInput
+            style={styles.textField}
+            placeholder=" informe seu Email"
+            keyboardType="email-address"
+          />
+          <TextInput
+            style={styles.textField}
+            placeholder="informe sua senha"
+            keyboardType="default"
+            secureTextEntry
+          />
+          <TextInput
+            style={styles.textField}
+            placeholder="repita a senha"
+            keyboardType="default"
+            secureTextEntry
+          />
+          <TouchableOpacity style={styles.button}
+           onPress={() =>  navigation.navigate('Home', {name: 'home'})
+          }
+          >
+            <Text style={(styles.buttonText)}>
+              Registrar
+            </Text>
+          </TouchableOpacity>
+
+          <View style={styles.rodape}>
+          </View>
+        </View>
+      </View>
+      <StatusBar style="auto" />
     </View>
-  );
-}
+ );
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
-  logo: {
-    width: 100,
-    height: 100,
-    marginBottom: 30,
+  body: {
+    height: "60%",
+    width: "100%",
+    alignItems: "center",
   },
-  loginText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
+  image: {
+    height: "20%",
+    width: "100%",
+    resizeMode: "contain",
   },
-  input: {
-    width: '100%',
-    height: 50,
-    borderColor: '#ccc',
+  areaInput: {
+    width: "100%",
+    height: "80%",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+  },
+  title: {
+    fontSize: 32,
+    marginTop: 15,
+  },
+  textField: {
+    borderColor: "#000",
     borderWidth: 1,
-    borderRadius: 5,
-    paddingLeft: 15,
-    marginBottom: 15,
+    borderRadius: 10,
+    width: "80%",
+    height: 50,
+    paddingHorizontal: 10,
   },
   button: {
-    width: '100%',
+    backgroundColor: "#778eec",
+    borderRadius: 10,
+    width: "80%",
     height: 50,
-    backgroundColor: '#7289da', 
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 5,
-    marginBottom: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    textAlign: "center",
   },
-  buttonText: {
-    color: '#fff',
+  rodape: {
+    flexDirection: "row",
+    width: "62.75%",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+  },
+
+  rodapeText: {
+    fontSize: 11,
+  },
+  buttonText : {
     fontSize: 18,
-    fontWeight: 'bold',
-  },
-  signupText: {
-    fontSize: 14,
-    color: '#777',
-  },
-  signupLink: {
-    color: '#7289da', 
-    fontWeight: 'bold',
-  },
+    color: "red",
+    fontWeight: "bold"
+  }
 });
+
+export default Register;

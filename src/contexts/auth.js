@@ -1,18 +1,21 @@
-const { createContext } = require("react");
+import { createContext } from "react";
+
+
 
 const AuthContext = createContext({});
 
 export const AuthProvider = ({children}) => {
-    return(
-<AuthContext.Provider value={{signed:false,
-    token:"Voce logou meus parabens",
-    email: "aula@fatectq.edu.br"}}>
-        
-        {children}
- </AuthContext.Provider>
-
+    return (
+        <AuthContext.Provider value={{
+            signed: false,
+            token: "asdsadawdw awadsdwa",
+            email: "aula@fatectp.edu.br"
+        }}>
+            {children}
+        </AuthContext.Provider>
     )
 }
 
-export default AuthContext;
 
+
+export default AuthContext;

@@ -1,101 +1,131 @@
-import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import {StyleSheet, Text, View, Image, TouchableOpacity, TextInput,} from "react-native";
+import { LoginUsuario } from "../services/auth-firebase";
 
+const icon = require("../../assets/favicon.png");
 
-import logo from '../../assets/favicon.png'; 
+const Login = ({navigation}) => {
 
-export default function Login({navigation}) {
+ const onClickEntrar = async () => {
+  const userLogin = await LoginUsuario();
+  navigation.navigate('Home', {name:'Home'})
+ }
+  
+const onClickRegistrar = ()=>{
+  navigation.navigate('Registro', {name:'registro'})
+}
   return (
     <View style={styles.container}>
-      <Image 
-        source={logo}  
-        style={styles.logo}
-      />
-      <Text style={styles.loginText}>Login</Text>
-      
-      <TextInput
-        style={styles.input}
-        placeholder="Nome de usuário"
-        autoCapitalize="none"
-        keyboardType="default"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Senha"
-        secureTextEntry={true}
-      />
-      
-      <TouchableOpacity   style={styles.button}>
-        
-        <Text style={styles.buttonText} onPress={() =>
-        navigation.navigate('Home', {name: 'Home'})
-      }>Acessar</Text>
+      <Image style={styles.image} source={icon} />
+      <View style={styles.body}>
+        <Text style={styles.title}>Login 1609</Text>
+        <View style={styles.areaInput}>
+          <TextInput
+            style={styles.textField}
+            placeholder="Email"
+            keyboardType="email-address"
+          />
+          <TextInput
+            style={styles.textField}
+            placeholder="Password"
+            keyboardType="default"
+            secureTextEntry
+          />
+          <TouchableOpacity style={styles.button}
+             onPress={onClickEntrar}
+           >
+            <Text style={(styles.buttonText, { color: "#fff" })}>
+              Acessar
+            </Text>
+          </TouchableOpacity>
 
-        <Text style={styles.signupText} 
-      onPress={() =>
-        navigation.navigate('Home', {name: 'Home'})
-      }>
-      </Text>
-      
-      </TouchableOpacity >
-      
-      <Text style={styles.signupText} 
-      onPress={() =>
-        navigation.navigate('Register', {name: 'Register'})
-      }>
-        Não possui conta? <Text style={styles.signupLink}>faça inscrição!</Text>
-      </Text>
+          <View style={styles.rodape}>
+            <Text style={styles.rodapeText}>Não possui conta?</Text>
+            
+            <TouchableOpacity onPress={() =>
+                    navigation.navigate('Registro', {name: 'registro'})
+            }>
+              <Text style={(styles.rodapeText, { color: "#00002" })}>
+                faça sua inscrição ...!
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+      <StatusBar style="auto" />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
-  logo: {
-    width: 100,
-    height: 100,
-    marginBottom: 30,
+
+  body: {
+    height: "60%",
+    width: "100%",
+    alignItems: "center",
   },
-  loginText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
+
+  image: {
+    height: "20%",
+    width: "100%",
+    resizeMode: "contain",
   },
-  input: {
-    width: '100%',
-    height: 50,
-    borderColor: '#ccc',
+
+  areaInput: {
+    width: "100%",
+    height: "80%",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+  },
+
+  title: {
+    fontSize: 32,
+    marginTop: 15,
+  },
+
+  textField: {
+    borderColor: "#000",
     borderWidth: 1,
-    borderRadius: 5,
-    paddingLeft: 15,
-    marginBottom: 15,
-  },
-  button: {
-    width: '100%',
+    borderRadius: 10,
+    width: "80%",
     height: 50,
-    backgroundColor: '#7289da', 
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 5,
-    marginBottom: 20,
+    paddingHorizontal: 10,
   },
-  buttonText: {
-    color: '#fff',
+
+  button: {
+    backgroundColor: "#778eec",
+    borderRadius: 10,
+    width: "80%",
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    textAlign: "center",
+  },
+
+  rodape: {
+    flexDirection: "row",
+    width: "62.75%",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    gap: 20,
+  },
+
+  rodapeText: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
-  signupText: {
-    fontSize: 14,
-    color: '#777',
-  },
-  signupLink: {
-    color: '#7289da', 
-    fontWeight: 'bold',
-  },
+
+  buttonText : {
+    fontSize: 11,
+    color: "red",
+  }
+
 });
+
+export default Login;

@@ -1,18 +1,13 @@
-import { NavigationContainer } from '@react-navigation/native';
-import AppRouters from './appRouters';
-import AuthRouters from './authRouters';
-import AuthContext from '../contexts/auth';
 import { useContext } from 'react';
+import AppRouters from './AppRouters';
+import AuthRouters from './AuthRouters';
+import AuthContext from '../contexts/auth';
 
 export default function Routers() {
-    const { signed} = useContext(AuthContext)
-    return (
-
-        <>
-        { signed ? <AuthRouters />: <AppRouters />}
-            
-           
-        </>
-
-    );
+  const {signed} = useContext(AuthContext)
+  return (
+    <>
+        { signed ? <AuthRouters /> : <AppRouters /> }     
+    </>
+  );
 }

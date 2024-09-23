@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { useContext } from "react";
+import React from "react";
 import {
   StyleSheet,
   Text,
@@ -8,38 +8,48 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
-import AuthContext from "../contexts/auth";
+
 
 const icon = require("../../assets/favicon.png");
 
-const Home = ({navigation}) => {
-  const {signed, email, token} = useContext(AuthContext)
-  return (
-      <View style={styles.container}>
-        
-        <View style={styles.body}>
-          <Text style={styles.title}>Home</Text>
-          <View style={styles.areaInput}>
-          <Text>area principal</Text>
-          <Text>- - - - - - - - - - - - - - - -</Text>
-          <Text>email: {email}</Text>
-          <Text> logado : {signed} </Text>
-          <Text> token : {token}</Text>
-          <Text>- - - - - - - - - - - - - - - -</Text>
-            
-            <TouchableOpacity style={styles.button}
-               onPress={() => navigation.navigate('Login', {name: 'Sair'}) }
-             >
-              <Text style={(styles.buttonText)}>
-                Sair / Finalizar
-              </Text>
-            </TouchableOpacity>
+const FichaUsuario  = ({navigation}) => (
+    <View style={styles.container}>
+      <Image style={styles.image} source={icon} />
+      <View style={styles.body}>
+        <Text style={styles.title}>Registro</Text>
+        <View style={styles.areaInput}>
+          <TextInput
+            style={styles.textField}
+            placeholder=" informe seu Email"
+            keyboardType="email-address"
+          />
+          <TextInput
+            style={styles.textField}
+            placeholder="informe sua senha"
+            keyboardType="default"
+            secureTextEntry
+          />
+          <TextInput
+            style={styles.textField}
+            placeholder="repita a senha"
+            keyboardType="default"
+            secureTextEntry
+          />
+          <TouchableOpacity style={styles.button}
+           onPress={() => navigation.navigate('Home', {name: 'home'})}
+          >
+            <Text style={(styles.buttonText)}>
+              Registrar
+            </Text>
+          </TouchableOpacity>
+
+          <View style={styles.rodape}>
           </View>
         </View>
-        <StatusBar style="auto" />
       </View>
-  );
-}
+      <StatusBar style="auto" />
+    </View>
+);
 
 const styles = StyleSheet.create({
   container: {
@@ -94,13 +104,13 @@ const styles = StyleSheet.create({
 
   rodapeText: {
     fontSize: 11,
-    color: "black"
   },
+
   buttonText: {
     fontSize: 18,
-    color: "black",
+    color: "red",  
     fontWeight: "bold"
-  },
+  }
 });
 
-export default Home;
+export default FichaUsuario;
